@@ -14,16 +14,11 @@ export default function Slider({ children, config, navigation,pagination }) {
     var props = {
         spaceBetween: 0,
         Lazy: true,
-        // autoplay: {
-        //     delay: 4500,
-        //     disableOnInteraction: false,
-        // },
         navigation: {
             nextEl: '.next',
             prevEl: '.prev',
         },
         loop: false,
-        // pagination: { el: '.swiper-pagination', clickable: true, dynamicBullets: true },
         pagination: {
             el: '.pagination', clickable: true,
             renderBullet: function (index, className) {

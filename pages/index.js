@@ -1,35 +1,44 @@
-import Head from 'next/head'
-import Image from 'next/image'
+import CardWrapper from '../component/Card'
 import Slider from '../component/Slider'
-
+import SearchComp from '../component/Search';
 
 export default function Home() {
 
   var BanerConfig = {
     lazy: true,
-    slidesPerView: 1, 
+    slidesPerView: 4,
     slidesPerGroup: 1,
     preloadImages: false,
     delay: 4000,
-    spaceBetween: 0,
-    navigation: false,
-    loop:true
+    spaceBetween: 25,
+    autoplay: {
+      delay: 2500,
+      disableOnInteraction: false,
+    },
+    loop: false,
+    breakpoints: { 200: { slidesPerView: 1, }, 576: { slidesPerView: 2, }, 1200: { slidesPerView: 4, }, 1440: { slidesPerView: 4, }, },
   }
   return (
     <>
-    <section style={{backgroundImage:`url(/image/homeBanner.jpg)`}}>
-    
-    </section>
-    
+      <section style={{ backgroundImage: `url(/image/homeBanner.jpg)`, height: "100vh",paddingTop:"10vh" }}>
+        <SearchComp/>
+        
+        <div className='container'>
+          <Slider config={BanerConfig} pagination={true} className="container">
+            <CardWrapper />
+            <CardWrapper />
+            <CardWrapper />
+            <CardWrapper />
+            <CardWrapper />
+            <CardWrapper />
+            <CardWrapper />
+            <CardWrapper />
+            <CardWrapper />
+            <CardWrapper />
+          </Slider>
+        </div>
+      </section>
+
     </>
   )
 }
-
-
-const BannerImg=[
-
-  {img:"https://assets.myntassets.com/f_webp,w_980,c_limit,fl_progressive,dpr_2.0/assets/images/2022/3/8/70478e25-a206-4d38-83b0-f94e8b75c5351646751364724-Handbags---Wallets_Desk.jpg"},
-  {img:"https://assets.myntassets.com/f_webp,w_980,c_limit,fl_progressive,dpr_2.0/assets/images/2022/3/8/9ce82891-515e-4781-a427-a95fef24902e1646751364756-Kurtas---Sets_Desk.jpg"},
-  {img:"https://assets.myntassets.com/f_webp,w_980,c_limit,fl_progressive,dpr_2.0/assets/images/2022/3/8/70478e25-a206-4d38-83b0-f94e8b75c5351646751364724-Handbags---Wallets_Desk.jpg"},
-]
-
