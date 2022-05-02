@@ -6,6 +6,7 @@ import CardWrapper from "../../component/Card";
 import axios from 'axios';
 import styled from "styled-components"
 import SearchComp from "../../component/Search";
+import Layout from "../../component/layout";
 
 export default function Search() {
   const router = useRouter()
@@ -39,8 +40,8 @@ export default function Search() {
   }
 
   return (
-    <>
-      <section style={{background:`${NEXT_PRIMARY_COLOR}`,padding:"40px 0"}}>
+    <Layout>
+      <section style={{background:`${NEXT_PRIMARY_COLOR}`,padding:"0 0 40px 0",}}>
       <SearchComp onSearch={SearchSubmit}/>
       <Row className="container" justify="space-between">
         <Col sm={24} xl={24}>
@@ -56,6 +57,6 @@ export default function Search() {
       </Row>
       </section>
 
-    </>
+    </Layout>
   )
 }

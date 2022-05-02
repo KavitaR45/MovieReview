@@ -57,7 +57,7 @@ export default function SearchComp({onSearch}) {
 
   return (
     <>
-       <div className='container' style={{marginBottom:"20px"}}>
+       <div className='container' style={{marginBottom:"20px",marginTop:"20px"}}>
           <InputGroup compact >
             <Select defaultValue="Movie"  className='select-wrap'>
               {/* <Option value="TV Show">TV Show</Option> */}

@@ -66,7 +66,7 @@ margin:${absolute ? '0':"20px 10px"};
                 <div style={{ position: `absolute`, color: "white", bottom: `${absolute ? "-34px":"20px"}`, left: `${absolute ? "52px":"55px"}`, zIndex: "5" }}><strong style={{ fontSize: "20px" }}>{vote_average}</strong>/10</div>
 
             </CardWrap>
-           {absolute ? <div style={{ position: `absolute`, background: "black", height: "100%", width: "100%", opacity: "0.65", zIndex: "2", top: "0",  borderRadius:"4px" }}></div>:null}
+           {absolute ? <div style={{ position: `absolute`, background: "black", height: "100%", width: "100%", opacity: "0.55", zIndex: "2", top: "0",  borderRadius:"4px" }}></div>:null}
         </LinkWrap>
         :null}
         </>
