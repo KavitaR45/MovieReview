@@ -50,7 +50,6 @@ export default function MovieSingle() {
                 })
         }
     }, [movieId])
-    console.log("MOVIE", stream,)
     useEffect(() => {
       if(stream.IN){
           if(stream.IN.rent){
@@ -104,7 +103,7 @@ export default function MovieSingle() {
                         <Row style={{ flexDirection: "column", margin: "10px 0 0px 0" }}>
                             <h3 className="text-link border-link" style={{ marginBottom: "20px" }}>Just Watch</h3>
                             <Row>
-                                {stream.IN.rent.map(x => <a href={stream.IN.link} target="_blank"><img src={"https://image.tmdb.org/t/p/original" + x.logo_path} style={{ padding: "10px", height: "70px", borderRadius: "4px" }} /></a>)}
+                                {stream.IN.rent.map((x,i) => <a key={stream.IN.link + i+x.logo_path}  href={stream.IN.link} target="_blank" rel="noreferrer"><img src={"https://image.tmdb.org/t/p/original" + x.logo_path} style={{ padding: "10px", height: "70px", borderRadius: "4px" }} /></a>)}
                             </Row>
                         </Row> : null}
                     </Col>

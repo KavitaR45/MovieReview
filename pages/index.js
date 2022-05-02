@@ -34,7 +34,6 @@ export default function Home() {
       })
       
   }, [])
-  console.log("POPularMovies", popularMovie, topRated)
 
   const SearchSubmit = value => {
     router.push("/search/" + value)
