@@ -4,7 +4,7 @@ import { NEXT_SECONDARY_COLOR,NEXT_WHITE_COLOR } from '../../public/theme';
 
 const { Option } = Select;
 const { Search } = Input;
-export default function SearchComp() {
+export default function SearchComp({onSearch}) {
     const InputGroup = styled(Input.Group)`
     .select-wrap{
         width:15%;
@@ -59,11 +59,11 @@ export default function SearchComp() {
     <>
        <div className='container' style={{marginBottom:"20px"}}>
           <InputGroup compact >
-            <Select defaultValue="TV Show" className='select-wrap'>
-              <Option value="TV Show">TV Show</Option>
+            <Select defaultValue="Movie"  className='select-wrap'>
+              {/* <Option value="TV Show">TV Show</Option> */}
               <Option value="Movie">Movie</Option>
             </Select>
-            <Search className='search-wrap' placeholder="Search for a Movie or TV Show" />
+            <Search className='search-wrap' placeholder="Search for a Movie " onSearch={onSearch}/>
           </InputGroup>
         </div>
 

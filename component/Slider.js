@@ -8,7 +8,7 @@ SwiperCore.use([Navigation, Pagination, Autoplay, Mousewheel, Virtual, EffectFad
 
 
 
-export default function Slider({ children, config, navigation,pagination }) {
+export default function Slider({ children, config, name,pagination }) {
    
 
     var props = {
@@ -31,10 +31,10 @@ export default function Slider({ children, config, navigation,pagination }) {
 
     return (
         <Swiper pagination={true}  {...props} style={{ position: "relative",width:"100%" }}  >
-            {children.map((X) => {
+            {children.map((X,i) => {
                 return (
                     <>
-                        <SwiperSlide style={{width:"100%"}}>{X}</SwiperSlide>
+                        <SwiperSlide key={name + i} style={{width:"100%"}}>{X}</SwiperSlide>
                     </>)
             })}
             {pagination ?
