@@ -43,7 +43,7 @@ export default function Search() {
       <section style={{background:`${NEXT_PRIMARY_COLOR}`,padding:"40px 0"}}>
       <SearchComp onSearch={SearchSubmit}/>
       <Row className="container" justify="space-between">
-        <Col sm={24} xl={18}>
+        <Col sm={24} xl={24}>
           <Row justify="space-between" style={{flexWrap:"wrap"}}>
             <ColWrap span={24} >
             {searchMovie ?  
