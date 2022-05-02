@@ -82,6 +82,7 @@ export default function Home() {
       <div  className="container"><Link href="/"><a><img src={"/image/logo.png"}/></a></Link></div>
         <SearchComp onSearch={SearchSubmit} />
         <div className='container'>
+        <h1 className="text-link border-link" style={{margin:"0px 0 40px 0"}}>Trending Movies</h1>
           {popularMovie ? <Slider config={BanerConfig} name={"POPular Movie"} pagination={true} className="container">
             {popularMovie.slice(0, 10).map((x, i) => <CardWrapper absolute  {...x} key={x.Title + i + x.imDbRating} />
             )}
@@ -92,13 +93,13 @@ export default function Home() {
       <Row className="container" justify="space-between">
         <Col sm={24} xl={24}>
           <Row justify="space-between" style={{ flexWrap: "wrap" }}>
+          <h2 className="text-link border-link" style={{margin:"20px 0 40px 0",display:"block",}}>Upcoming Movies</h2>
             <ColWrap span={24} >
-              <h2 className="text-link border-link" style={{margin:"20px 0 40px 0"}}>Upcoming</h2>
-              {latest ? <Slider config={OtherConfig} name={"Upcoming Movie"} pagination={true} className="container">
-                {latest.slice(0, 10).map((x, i) => <CardWrapper absolute  {...x} key={x.Title + i + x.imDbRating} />
-                )}
-              </Slider> : null}
+              {latest ?  
+            latest.slice(0,8).map((x,i)=><CardWrapper  {...x} key={x.Title + i + x.imDbRating } />)
+            :null}
             </ColWrap>
+            
           </Row>
         </Col>
       </Row>
@@ -107,12 +108,11 @@ export default function Home() {
       <Row className="container" justify="space-between">
         <Col sm={24} xl={24}>
           <Row justify="space-between" style={{ flexWrap: "wrap" }}>
+              <h2 className="text-link border-link" style={{margin:"20px 0 40px 0",display:"block",}}>Top Rated Movies</h2>
             <ColWrap span={24} >
-              <h2 className="text-link border-link" style={{margin:"20px 0 40px 0"}}>Top Rated</h2>
-              {topRated ? <Slider config={OtherConfig} name={"Top Rated Movie"} pagination={true} className="container">
-                {topRated.slice(0, 10).map((x, i) => <CardWrapper absolute  {...x} key={x.Title + i + x.imDbRating} />
-                )}
-              </Slider> : null}
+              {topRated ?  
+            topRated.slice(0,8).map((x,i)=><CardWrapper  {...x} key={x.Title + i + x.imDbRating } />)
+            :null}
             </ColWrap>
           </Row>
         </Col>

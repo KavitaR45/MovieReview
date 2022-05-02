@@ -9,12 +9,15 @@ import CardWrapper from "../../component/Card";
 import axios from 'axios';
 import Layout from "../../component/layout";
 import Slider from '../../component/Slider'
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 export default function MovieSingle() {
     const router = useRouter()
     const movieId = router.query.slug
     console.log("movieName", movieId); // '/blog/xyz'
     const [movieData, setMovieData] = useState("")
+    const [stream, setStream] = useState("")
+    const [streamIN, setStreamIN] = useState(false)
     const [movieDataRelated, setMovieDataRelated] = useState("")
 
     var OtherConfig = {
@@ -24,13 +27,13 @@ export default function MovieSingle() {
         preloadImages: false,
         delay: 4000,
         spaceBetween: 25,
-        // autoplay: {
-        //   delay: 2500,
-        //   disableOnInteraction: false,
-        // },
+        autoplay: {
+            delay: 2500,
+            disableOnInteraction: false,
+        },
         loop: false,
         breakpoints: { 200: { slidesPerView: 1, }, 576: { slidesPerView: 2, }, 1200: { slidesPerView: 4, }, 1440: { slidesPerView: 4, }, },
-      }
+    }
     useEffect(() => {
         if (movieId) {
             axios.get(`https://api.themoviedb.org/3/movie/${movieId}?api_key=73c98428fbd9b20c3cc69f83f5f2c42b&language=en-US`)
@@ -41,10 +44,24 @@ export default function MovieSingle() {
                 .then(res => {
                     setMovieDataRelated(res.data.results)
                 })
+            axios.get(`https://api.themoviedb.org/3/movie/${movieId}/watch/providers?api_key=73c98428fbd9b20c3cc69f83f5f2c42b`)
+                .then(res => {
+                    setStream(res.data.results);
+                })
         }
     }, [movieId])
+    console.log("MOVIE", stream,)
+    useEffect(() => {
+      if(stream.IN){
+          if(stream.IN.rent){
+              setStreamIN(true);
+          }else{
+              setStreamIN(false);
+          }
+      }
+    }, [stream])
+    
 
-    console.log("MOvieList", movieData, movieDataRelated)
     let genres = movieData.genres
 
     const ColWrap = styled(Col)`
@@ -62,11 +79,11 @@ export default function MovieSingle() {
 
     return (
         <Layout>
-            <section style={{ background: `${NEXT_PRIMARY_COLOR}`,  }}>
+            <section style={{ background: `${NEXT_PRIMARY_COLOR}`, }}>
                 <SearchComp onSearch={SearchSubmit} />
                 <Row className="container" justify="space-between">
                     <Col xs={24} sm={6}>
-                        {movieData ? <img style={{ width: "100%", borderRadius: "4px", marginBottom: "20px" }} src={"https://image.tmdb.org/t/p/original" + movieData.poster_path} /> : null}
+                        {movieData ? <LazyLoadImage style={{ width: "100%", borderRadius: "4px", marginBottom: "20px" }} src={"https://image.tmdb.org/t/p/original" + movieData.poster_path} /> : null}
                     </Col>
                     <Col xs={24} sm={16}>
                         <Row align="middle">
@@ -83,11 +100,18 @@ export default function MovieSingle() {
                             <h2 className="text-link border-link" style={{ marginBottom: "20px" }}>Overview</h2>
                             <p className="text-white">{movieData.overview}</p>
                         </Row>
+                        {streamIN ? 
+                        <Row style={{ flexDirection: "column", margin: "10px 0 0px 0" }}>
+                            <h3 className="text-link border-link" style={{ marginBottom: "20px" }}>Just Watch</h3>
+                            <Row>
+                                {stream.IN.rent.map(x => <a href={stream.IN.link} target="_blank"><img src={"https://image.tmdb.org/t/p/original" + x.logo_path} style={{ padding: "10px", height: "70px", borderRadius: "4px" }} /></a>)}
+                            </Row>
+                        </Row> : null}
                     </Col>
                 </Row>
             </section>
             <section style={{ background: `${NEXT_PRIMARY_COLOR}`, padding: "0px 0 40px 0", }}>
-            <Row className="container" justify="space-between">
+                <Row className="container" justify="space-between">
                     <Col sm={24} xl={24}>
                         <Row justify="space-between" style={{ flexWrap: "wrap" }}>
                             <ColWrap span={24} >

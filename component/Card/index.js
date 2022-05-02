@@ -2,6 +2,7 @@ import { Card, Avatar } from 'antd';
 import styled from "styled-components"
 import { BsStarFill } from "react-icons/bs"
 import { NEXT_PRIMARY_COLOR } from '../../public/theme';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 const { Meta } = Card;
 
@@ -55,7 +56,7 @@ margin:${absolute ? '0':"20px 10px"};
             <CardWrap
                 style={{ width: "100%", borderRadius: "4px" }}
                 cover={ 
-                    <img alt="example" src={"https://image.tmdb.org/t/p/original" + poster_path} />
+                    <LazyLoadImage alt="example" src={"https://image.tmdb.org/t/p/original" + poster_path} />
                 }
             >
                 {/* {genre ? <div style={{background:"#f5b50a",width:"max-content",color:"white",borderRadius:"4px",padding:"0 5px",margin:"10px 0"}}>Action</div> : null} */}
@@ -63,7 +64,7 @@ margin:${absolute ? '0':"20px 10px"};
                     title={title ? title : original_name ? original_name : null}
                     description={<BsStarFill style={{ color: "#f5b50a", fontSize: "22px" }} />}
                 />
-                <div style={{ position: `absolute`, color: "white", bottom: `${absolute ? "-34px":"20px"}`, left: `${absolute ? "52px":"55px"}`, zIndex: "5" }}><strong style={{ fontSize: "20px" }}>{vote_average}</strong>/10</div>
+                <div style={{ position: `absolute`, color: "white", bottom: `${absolute ? "-34px":"20px"}`, left: `${absolute ? "52px":"55px"}`, zIndex: "5" }}><strong style={{ fontSize: "20px" }}>{parseFloat(vote_average).toFixed(1)}</strong>/10</div>
 
             </CardWrap>
            {absolute ? <div style={{ position: `absolute`, background: "black", height: "100%", width: "100%", opacity: "0.55", zIndex: "2", top: "0",  borderRadius:"4px" }}></div>:null}
