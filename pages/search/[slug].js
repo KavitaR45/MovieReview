@@ -3,41 +3,45 @@ import { NEXT_PRIMARY_COLOR } from '../../public/theme';
 import { Row,Col } from 'antd';
 import { useRouter } from 'next/router';
 import CardWrapper from "../../component/Card";
-import axios from 'axios';
 import styled from "styled-components"
 import SearchComp from "../../component/Search";
 import Layout from "../../component/layout";
-
+import { API_INSTANCE, AxiosGET } from "../../component/API/api";
 export default function Search() {
   const router = useRouter()
   const movie = router.query.slug
-  console.log("movieName",movie); // '/blog/xyz'
   const [searchMovie, setSearchMovie] = useState("")
  
+ 
+  const SearchMovieData = async () => {
+    try {
+      const response = await  AxiosGET(API_INSTANCE, `/search/movie?api_key=73c98428fbd9b20c3cc69f83f5f2c42b&language=en-US&query=${movie}&page=1&include_adult=false`);
+      setSearchMovie(response.results);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  
   useEffect(() => {
-    axios.get(`https://api.themoviedb.org/3/search/movie?api_key=73c98428fbd9b20c3cc69f83f5f2c42b&language=en-US&query=${movie}&page=1&include_adult=false`)
-    .then(res => {
-      setSearchMovie(res.data.results)
-    })
-  },[])
+    SearchMovieData();
+  }, [movie]);
+  
 
-  console.log("MOvieList",searchMovie)
 
   const ColWrap = styled(Col)`
   display:flex;
   flex-wrap:wrap;
-  justify-content:start;
-  @media(max-width:480px){
-    justify-content:space-around;
-  }
+  justify-content:space-around;
   `
-  const SearchSubmit = value => {
-    router.push("/search/"+value)
-    axios.get(`https://api.themoviedb.org/3/search/movie?api_key=73c98428fbd9b20c3cc69f83f5f2c42b&language=en-US&query=${value}&page=1&include_adult=false`)
-    .then(res => {
-      setSearchMovie(res.data.results)
-    })
-  }
+  const SearchSubmit = async (value) => {
+    try {
+      router.push("/search/"+value);
+      const response = await axios.get(`https://api.themoviedb.org/3/search/movie?api_key=73c98428fbd9b20c3cc69f83f5f2c42b&language=en-US&query=${value}&page=1&include_adult=false`);
+      setSearchMovie(response.results);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   return (
     <Layout>
